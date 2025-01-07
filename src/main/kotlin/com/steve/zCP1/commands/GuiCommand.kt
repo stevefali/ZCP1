@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack
 
 class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
 
+    private val INVENTORY_NAME = "GUI"
+
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
     }
@@ -26,7 +28,7 @@ class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
             return true
         }
 
-        val inventory = Bukkit.createInventory(sender, 9 * 1, "GUI")
+        val inventory = Bukkit.createInventory(sender, 9 * 1, INVENTORY_NAME)
         inventory.addItem(makeItem(Material.ENDER_PEARL, "Transporter", listOf("Go to a Place.")))
 
         sender.openInventory(inventory)
@@ -47,7 +49,7 @@ class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
 
     @EventHandler
     fun onItemClicked(event: InventoryClickEvent) {
-        if (event.view.title != "GUI") {
+        if (event.view.title != INVENTORY_NAME) {
             return
         }
 
