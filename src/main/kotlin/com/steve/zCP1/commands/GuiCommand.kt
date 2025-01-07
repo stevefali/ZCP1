@@ -2,6 +2,7 @@ package com.steve.zCP1.commands
 
 import com.steve.zCP1.ZCP1
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -46,8 +47,15 @@ class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
 
     @EventHandler
     fun onItemClicked(event: InventoryClickEvent) {
-        if (event.view.title == "GUI") {
-            event.isCancelled = true
+        if (event.view.title != "GUI") {
+            return
         }
+
+        if (event.currentItem?.type == Material.ENDER_PEARL) {
+            val player = event.whoClicked
+            player.teleport(Location(player.world, 25.0, 64.0, 25.0))
+        }
+
+        event.isCancelled = true
     }
 }

@@ -2,6 +2,7 @@ package com.steve.zCP1
 
 import com.steve.zCP1.commands.GuiCommand
 import com.steve.zCP1.events.BreakEvent
+import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
 
 class ZCP1 : JavaPlugin() {
@@ -21,5 +22,7 @@ class ZCP1 : JavaPlugin() {
 
     override fun onDisable() {
         // Plugin shutdown logic
+
+        HandlerList.unregisterAll(breakEvent)
     }
 }
