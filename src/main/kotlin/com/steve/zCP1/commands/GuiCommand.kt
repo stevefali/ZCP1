@@ -12,8 +12,11 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 
-class GuiCommand: CommandExecutor{
+class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
 
+    init {
+        plugin.server.pluginManager.registerEvents(this, plugin)
+    }
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -41,4 +44,10 @@ class GuiCommand: CommandExecutor{
         return itemStack
     }
 
+    @EventHandler
+    fun onItemClicked(event: InventoryClickEvent) {
+        if (event.view.title == "GUI") {
+            event.isCancelled = true
+        }
+    }
 }

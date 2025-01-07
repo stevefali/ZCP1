@@ -13,7 +13,7 @@ class ZCP1 : JavaPlugin() {
         breakEvent = BreakEvent(server)
 
 
-        getCommand("gui")?.setExecutor(GuiCommand())
+        getCommand("gui")?.setExecutor(GuiCommand(this))
 
         server.pluginManager.registerEvents(breakEvent, this)
 
