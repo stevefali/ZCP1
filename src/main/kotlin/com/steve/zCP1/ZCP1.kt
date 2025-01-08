@@ -2,6 +2,7 @@ package com.steve.zCP1
 
 import com.steve.zCP1.commands.GuiCommand
 import com.steve.zCP1.events.BreakEvent
+import com.steve.zCP1.utils.DelayedTask
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -13,6 +14,8 @@ class ZCP1 : JavaPlugin() {
 
 
     override fun onEnable() {
+        DelayedTask(this)
+
         breakEvent = BreakEvent(server)
 
 
@@ -33,9 +36,9 @@ class ZCP1 : JavaPlugin() {
 
 
     private fun setupSpawnConfig() {
-        config.addDefault("spawnX", 25.0)
-        config.addDefault("spawnY", 64.0)
-        config.addDefault("spawnZ", 25.0)
+        config.addDefault("teleportX", 25.0)
+        config.addDefault("teleportY", 64.0)
+        config.addDefault("teleportZ", 25.0)
     }
 
 }

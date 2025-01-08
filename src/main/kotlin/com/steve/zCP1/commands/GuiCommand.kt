@@ -1,12 +1,14 @@
 package com.steve.zCP1.commands
 
 import com.steve.zCP1.ZCP1
+import com.steve.zCP1.utils.DelayedTask
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -59,13 +61,18 @@ class GuiCommand(plugin: ZCP1) : CommandExecutor, Listener {
             player.teleport(
                 Location(
                     player.world,
-                    config.getDouble("spawnX"),
-                    config.getDouble("spawnY"),
-                    config.getDouble("spawnZ"),
+                    config.getDouble("teleportX"),
+                    config.getDouble("teleportY"),
+                    config.getDouble("teleportZ"),
                     player.location.yaw,
                     player.location.pitch
                 )
             )
+
+            DelayedTask({
+                player.world.spawnEntity(player.location, EntityType.SHEEP)
+            }, 20 * 3)
+
         }
 
         event.isCancelled = true
