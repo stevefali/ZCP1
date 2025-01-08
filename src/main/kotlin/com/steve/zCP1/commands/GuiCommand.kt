@@ -13,9 +13,10 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 
-class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
+class GuiCommand(plugin: ZCP1) : CommandExecutor, Listener {
 
     private val INVENTORY_NAME = "GUI"
+    private val config = plugin.config
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -55,7 +56,16 @@ class GuiCommand(plugin: ZCP1): CommandExecutor, Listener {
 
         if (event.currentItem?.type == Material.ENDER_PEARL) {
             val player = event.whoClicked
-            player.teleport(Location(player.world, 25.0, 64.0, 25.0))
+            player.teleport(
+                Location(
+                    player.world,
+                    config.getDouble("spawnX"),
+                    config.getDouble("spawnY"),
+                    config.getDouble("spawnZ"),
+                    player.location.yaw,
+                    player.location.pitch
+                )
+            )
         }
 
         event.isCancelled = true

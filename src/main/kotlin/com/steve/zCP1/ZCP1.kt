@@ -9,6 +9,8 @@ class ZCP1 : JavaPlugin() {
 
     private lateinit var breakEvent: BreakEvent
 
+    private val config = getConfig();
+
 
     override fun onEnable() {
         breakEvent = BreakEvent(server)
@@ -18,6 +20,8 @@ class ZCP1 : JavaPlugin() {
 
         server.pluginManager.registerEvents(breakEvent, this)
 
+        setupSpawnConfig()
+
     }
 
     override fun onDisable() {
@@ -25,4 +29,13 @@ class ZCP1 : JavaPlugin() {
 
         HandlerList.unregisterAll(breakEvent)
     }
+
+
+
+    private fun setupSpawnConfig() {
+        config.addDefault("spawnX", 25.0)
+        config.addDefault("spawnY", 64.0)
+        config.addDefault("spawnZ", 25.0)
+    }
+
 }
