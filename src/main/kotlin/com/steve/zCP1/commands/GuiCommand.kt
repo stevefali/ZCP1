@@ -58,19 +58,21 @@ class GuiCommand(plugin: ZCP1) : CommandExecutor, Listener {
 
         if (event.currentItem?.type == Material.ENDER_PEARL) {
             val player = event.whoClicked
+            val location = Location(
+                player.world,
+                config.getDouble("teleportX"),
+                config.getDouble("teleportY"),
+                config.getDouble("teleportZ"),
+                player.location.yaw,
+                player.location.pitch
+            )
             player.teleport(
-                Location(
-                    player.world,
-                    config.getDouble("teleportX"),
-                    config.getDouble("teleportY"),
-                    config.getDouble("teleportZ"),
-                    player.location.yaw,
-                    player.location.pitch
-                )
+                location
             )
 
             DelayedTask({
                 player.world.spawnEntity(player.location, EntityType.SHEEP)
+                player.world.getBlockAt(location.add(2.0, 1.0, 0.0)).type = Material.GOLD_BLOCK
             }, 20 * 3)
 
         }
