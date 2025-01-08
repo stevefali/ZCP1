@@ -16,7 +16,7 @@ class DelayedTask(plugin: Plugin) {
         var plug: Plugin? = null;
     }
 
-    constructor(runnable: Runnable, delay: Long) : this(plug!!) {
+    constructor(delay: Long, runnable: Runnable) : this(plug!!) {
         if (plug!!.isEnabled) {
             id  = Bukkit.getScheduler().scheduleSyncDelayedTask(plug!!, runnable, delay)
         } else {

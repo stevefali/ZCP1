@@ -70,10 +70,10 @@ class GuiCommand(plugin: ZCP1) : CommandExecutor, Listener {
                 location
             )
 
-            DelayedTask({
+            DelayedTask(20 * 3) {
                 player.world.spawnEntity(player.location, EntityType.SHEEP)
                 player.world.getBlockAt(location.add(2.0, 1.0, 0.0)).type = Material.GOLD_BLOCK
-            }, 20 * 3)
+            }
 
         }
 
