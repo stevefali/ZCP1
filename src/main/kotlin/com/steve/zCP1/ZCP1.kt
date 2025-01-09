@@ -2,6 +2,7 @@ package com.steve.zCP1
 
 import com.steve.zCP1.commands.GuiCommand
 import com.steve.zCP1.events.BreakEvent
+import com.steve.zCP1.events.PlayerEvent
 import com.steve.zCP1.utils.DelayedTask
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
@@ -9,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class ZCP1 : JavaPlugin() {
 
     private lateinit var breakEvent: BreakEvent
+    private lateinit var playerEvent: PlayerEvent
 
     private val config = getConfig();
 
@@ -16,12 +18,14 @@ class ZCP1 : JavaPlugin() {
     override fun onEnable() {
         DelayedTask(this)
 
-        breakEvent = BreakEvent(server)
+        breakEvent = BreakEvent(this)
+        playerEvent = PlayerEvent(this)
 
 
         getCommand("gui")?.setExecutor(GuiCommand(this))
 
         server.pluginManager.registerEvents(breakEvent, this)
+        server.pluginManager.registerEvents(playerEvent, this)
 
         setupSpawnConfig()
 
