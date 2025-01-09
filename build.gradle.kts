@@ -14,11 +14,14 @@ repositories {
     maven("https://oss.sonatype.org/content/groups/public/") {
         name = "sonatype"
     }
+    mavenLocal()
 }
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compileOnly("org.spigotmc:spigot:1.21.3-R0.1-SNAPSHOT")
+
 }
 
 idea {

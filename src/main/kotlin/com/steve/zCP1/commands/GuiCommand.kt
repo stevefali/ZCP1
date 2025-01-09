@@ -15,6 +15,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 
+
 class GuiCommand(plugin: ZCP1) : CommandExecutor, Listener {
 
     private val INVENTORY_NAME = "GUI"
